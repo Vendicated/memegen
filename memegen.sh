@@ -36,7 +36,7 @@ dest=$2
 header=$3
 footer=$4
 
-if [ -f "$dest" ]; then
+if [ -e "$dest" ]; then
   printf "%s already exists, please delete it and run this command again\n" "$dest"
   exit
 elif ! touch "$dest" 2>/dev/null; then
