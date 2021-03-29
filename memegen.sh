@@ -33,18 +33,25 @@ fi
 
 src=$1
 dest=$2
-header=$3
-footer=$4
+header="$(echo "$3" | awk '{print toupper($0)}')"
+footer="$(echo "$4" | awk '{print toupper($0)}')"
 
 if [ -e "$dest" ]; then
-  printf "%s already exists, please delete it and run this command again\n" "$dest"
-  exit
-elif ! touch "$dest" 2>/dev/null; then
-  printf "%s is not a valid path\n" "$dest"
-  exit
+  printf "%s exists, override? [Y|n] " "$dest"
+  read response
+  if [ -z "$response" ] || [ "$response" = "y" ]; then
+    rm -f "$dest"
+  else
+    exit
+  fi
+else
+  if ! touch "$dest" 2>/dev/null; then
+    printf "%s is not a valid path\n" "$dest"
+    exit
+  else
+    rm -f "$dest"
+  fi
 fi
-
-rm "$dest"
 
 if [ ! -e "$src" ]; then
   if curl -s "$src" > /tmp/memetemp; then
@@ -67,7 +74,7 @@ font=Impact
 
 width=`identify -format %w ${src}`
 caption_height=$((width/6))
-strokewidth=$((width/500))
+strokewidth=$((width/500 > 1 ? width/500 : 1))
 
 convert "$src" \
   -background none \
