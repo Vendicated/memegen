@@ -72,16 +72,16 @@ fi
 
 font=Impact
 
-width=`identify -format %w ${src}`
+width=$(identify -format %w ${src})
 caption_height=$((width/6))
-strokewidth=$((width/400 > 1 ? width/400 : 1))
+stroke_width=$((width/400 > 1 ? width/400 : 1))
 
 convert "$src" \
   -background none \
   -font "$font" \
   -fill white \
   -stroke black \
-  -strokewidth "$strokewidth" \
+  -strokewidth $stroke_width \
   -size "${width}x${caption_height}" \
     -gravity north caption:"$header" -composite \
     -gravity south caption:"$footer" -composite \
