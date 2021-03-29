@@ -21,8 +21,8 @@ memegen <INPUT_FILE> <OUTPUT_FILE> [TOP_CAPTION] [BOTTOM_CAPTION]
 ## Example
 
 ```sh
-$ memegen edsheeran.png fortnite.png "Got a number one victory royale" "Yeah fortnite we 'bout to get down"
-Done! Saved to fortnite.png
+$ memegen https://i.imgur.com/Yu6kZc5.jpg 5g.jpg "5g users be like" "omg my phone so fast nya~"
+Done! Saved to 5g.jpg
 ```
 
 Results in:
