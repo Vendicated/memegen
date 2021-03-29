@@ -46,21 +46,22 @@ fi
 
 rm "$dest"
 
-if [ ! -f "$src" ]; then
+if [ ! -e "$src" ]; then
   if curl -s "$src" > /tmp/memetemp; then
     trap "rm -f /tmp/memetemp" INT TERM EXIT
-    meta="$(file "/tmp/memetemp")"
-    if [ "${meta#*image}" == "$meta" ]; then
-      printf "%s doesn't seem to be a valid image\n" "$src"
-      exit
-    else
-      src=/tmp/memetemp
-    fi
+    src=/tmp/memetemp
   else
     printf "%s doesn't seem to be a valid file or url\n" "$src"
     exit
   fi
 fi
+
+meta="$(file "$src")"
+if [ "${meta#*image}" == "$meta" ]; then
+  printf "%s doesn't seem to be a valid image\n" "$1"
+  exit
+fi
+
 
 font=Impact
 
