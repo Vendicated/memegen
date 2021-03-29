@@ -57,7 +57,7 @@ if [ ! -e "$src" ]; then
 fi
 
 meta="$(file "$src")"
-if [ "${meta#*image}" == "$meta" ]; then
+if test "${meta#*image}" = "$meta"; then
   printf "%s doesn't seem to be a valid image\n" "$1"
   exit
 fi
