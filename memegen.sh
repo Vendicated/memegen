@@ -48,6 +48,7 @@ rm "$dest"
 
 if [ ! -f "$src" ]; then
   if curl -s "$src" > /tmp/memetemp; then
+    trap "rm -f /tmp/memetemp" INT TERM EXIT
     meta="$(file "/tmp/memetemp")"
     if [ "${meta#*image}" == "$meta" ]; then
       printf "%s doesn't seem to be a valid image\n" "$src"
