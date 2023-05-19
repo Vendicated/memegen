@@ -38,7 +38,7 @@ footer="$(echo "$4" | awk '{print toupper($0)}')"
 
 if [ -e "$dest" ]; then
   printf "%s exists, override? [Y|n] " "$dest"
-  read response
+  read -r response
   if [ -z "$response" ] || [ "$response" = "y" ]; then
     rm -f "$dest"
   else
@@ -72,7 +72,7 @@ fi
 
 font=Impact
 
-width=$(identify -format %w ${src})
+width=$(identify -format %w "${src}")
 caption_height=$((width/6))
 stroke_width=$((width/400 > 1 ? width/400 : 1))
 
